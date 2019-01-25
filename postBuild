@@ -3,4 +3,4 @@
 jupyter nbextension enable --py --sys-prefix widgetsnbextension
 jupyter nbextension enable --py --sys-prefix bqplot
 
-cd nbinteract && pip install -U -e . && cd -
+cd nbinteract_fork && pip install -U -e . && cd -

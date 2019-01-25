@@ -29,7 +29,7 @@ __all__ = ['hist', 'bar', 'scatter_drag', 'scatter', 'line', 'Figure']
 PLACEHOLDER_ZEROS = np.zeros(10)
 PLACEHOLDER_RANGE = np.arange(10)
 
-DARK_BLUE = '#FF0000'
+DARK_BLUE = '#000000'
 GOLDENROD = '#FEC62C'
 
 ##############################################################################
@@ -282,7 +282,9 @@ def bar(x_fn, y_fn, *, options={}, **interact_params):
     params = {
         'marks': [{
             'x': _array_or_placeholder(x_fn, PLACEHOLDER_RANGE),
-            'y': _array_or_placeholder(y_fn)
+            'y': _array_or_placeholder(y_fn),
+            'colors': bq.CATEGORY10,
+            'stroke': '#000000'
         }]
     }
     fig = options.get('_fig', False) or _create_fig(
@@ -424,6 +426,7 @@ def scatter(x_fn, y_fn, *, options={}, **interact_params):
             'x': _array_or_placeholder(x_fn),
             'y': _array_or_placeholder(y_fn),
             'marker': _get_option('marker'),
+            'colors': ['#000000']
         }]
     }
     fig = options.get('_fig', False) or _create_fig(options=options)
