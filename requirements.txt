@@ -1,0 +1,12 @@
+numpy
+pandas
+scipy
+seaborn
+folium
+matplotlib
+datascience
+ipywidgets>=7.0.0
+bqplot
+nbinteract>=0.2.4
+git+git://github.com/diana-hep/pyhf.git#egg=pyhf
+
