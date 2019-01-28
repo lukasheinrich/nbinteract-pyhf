@@ -52,7 +52,7 @@ def viz_likelihood(json_data):
     )
 
 
-    ranges = {k: tuple(pdf.config.par_map[k]['paramset'].suggested_bounds[0]) for k in pars.keys()}
+    ranges = {k: tuple(map(float,tuple(pdf.config.par_map[k]['paramset'].suggested_bounds[0]))) for k in pars.keys()}
 
 
     counts = plot_lhood(pdf,data,selector)
