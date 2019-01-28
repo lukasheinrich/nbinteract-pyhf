@@ -15,7 +15,7 @@ def read_wspace(wspace):
         ),
     }
     pdf = pyhf.Model(spec, poiname = 'SigXsecOverSM')
-    data = wspace['data'][pdf.channels[0]]
+    data = wspace['data'][pdf.config.channels[0]]
     selector = {k: v['slice'].start for k,v in pdf.config.par_map.items()}
     init = pdf.config.suggested_init()
     pars = {k: init[v] for k,v in selector.items()}
