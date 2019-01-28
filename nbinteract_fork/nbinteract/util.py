@@ -40,7 +40,9 @@ def maybe_curry(maybe_fn, first_arg) -> 'Function | Any':
     """
     if not callable(maybe_fn):
         return maybe_fn
-    return tz.curry(maybe_fn)(first_arg)
+    curried = tz.curry(maybe_fn)(first_arg)
+    curried.__custom_sig__ = maybe_fn.__custom_sig__
+    return curried
 
 
 ##############################################################################
@@ -97,6 +99,7 @@ def get_all_args(fn) -> list:
     ['x', 'y', 'z']
     """
     sig = inspect.signature(fn)
+    sig = fn.__custom_sig__
     return list(sig.parameters)
 
 
@@ -113,10 +116,12 @@ def get_required_args(fn) -> list:
     ['x']
     """
     sig = inspect.signature(fn)
-    return [
+    sig = fn.__custom_sig__
+    a =  [
         name for name, param in sig.parameters.items()
         if param.default == inspect._empty and param.kind not in VAR_ARGS
     ]
+    return a
 
 
 def pick_kwargs(kwargs: dict, required_args: list, prefix: str = None):
@@ -160,7 +165,8 @@ def pick_kwargs(kwargs: dict, required_args: list, prefix: str = None):
             'for the following parameters: {}'.format(conflicting_args)
         )
 
-    return tz.merge(picked, prefixed)
+    merged = tz.merge(picked, prefixed)
+    return merged
 
 
 def _remove_prefix(string: str, prefix: str) -> str:

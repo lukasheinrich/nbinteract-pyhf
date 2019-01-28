@@ -39,26 +39,17 @@ def get_mc_counts(pdf, pars):
 
 
   
-
+import inspect
 def viz_likelihood(json_data):
     pdf, data, selector, pars  = read_wspace(json_data)
 
-    options = {
-        'xlim': (-5,55),
-        'ylim': (0, 1000),
-        'bins': 20
-    }
 
 
-    def yields(xs,mc2_shape_conv,mc2_weight_var1,mc1_shape_conv,mc1_weight_var1,SigXsecOverSM,lumi):
-        pars = {'mc2_shape_conv': mc2_shape_conv,
-                'mc2_weight_var1': mc2_weight_var1,
-                'mc1_shape_conv': mc1_shape_conv,
-                'mc1_weight_var1': mc1_weight_var1,
-                'SigXsecOverSM': SigXsecOverSM,
-                'lumi': lumi}
+    def yields(xs,_,**pars):
         return plot_lhood(pdf,data,selector,**pars)
-
+    yields.__custom_sig__ = inspect.Signature(parameters=([inspect.Parameter(n, inspect.Parameter.POSITIONAL_OR_KEYWORD)
+        for n in ['_']+list(pars.keys())])
+    )
 
 
     ranges = {k: tuple(pdf.config.par_map[k]['paramset'].suggested_bounds[0]) for k in pars.keys()}
@@ -66,8 +57,14 @@ def viz_likelihood(json_data):
 
     counts = plot_lhood(pdf,data,selector)
 
+    options = {
+        'xlim': (0,len(data)),
+        'ylim': (0, np.max(counts)*2.),
+        'bins': 20
+    }
+
     fig = nbi.Figure(options = options)
-    fig.bar(np.arange(len(counts[0])), yields, **ranges)
+    fig.bar(np.arange(len(counts[0])), yields, _ = [], **ranges)
     fig.scatter(np.arange(len(counts[0])), data)
     return fig
 

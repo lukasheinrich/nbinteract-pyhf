@@ -45,7 +45,7 @@ default_options = {
     'xlim': (None, None),
     'ylim': (None, None),
     'animation_duration': 0,
-    'bins': 10,
+    # 'bins': 10,
     'normalized': True,
     'marker': 'circle',
 }
@@ -70,8 +70,8 @@ option_doc = {
         'Tuple containing (lower, upper) for x-axis',
     'ylim':
         'Tuple containing (lower, upper) for y-axis',
-    'bins':
-        'Non-negative int for the number of bins (default 10)',
+    # 'bins':
+    #     'Non-negative int for the number of bins (default 10)',
     'normalized': (
         'Normalize histogram area to 1 if True. If False, plot '
         'unmodified counts. (default True)'
@@ -177,7 +177,9 @@ def use_options(allowed):
 ##############################################################################
 @use_options([
     'title', 'aspect_ratio', 'animation_duration', 'xlabel', 'ylabel', 'xlim',
-    'ylim', 'bins', 'normalized'
+    'ylim',
+    # 'bins',
+    'normalized'
 ])
 def hist(hist_function, *, options={}, **interact_params):
     """
@@ -208,7 +210,7 @@ def hist(hist_function, *, options={}, **interact_params):
     params = {
         'marks': [{
             'sample': _array_or_placeholder(hist_function),
-            'bins': _get_option('bins'),
+            # 'bins': _get_option('bins'),
             'normalized': _get_option('normalized'),
             'scales': (
                 lambda opts: {'sample': opts['x_sc'], 'count': opts['y_sc']}
@@ -545,7 +547,9 @@ class Figure(object):
         self.figure = _create_fig_with_options(options=options)
         self.widgets = []
 
-    @use_options(['bins', 'normalized'])
+    @use_options([
+        # 'bins',
+        'normalized'])
     def hist(self, hist_function, *, options={}, **interact_params):
         options = tz.assoc(options, '_fig', self.figure)
         box = hist(hist_function, options=options, **interact_params)
