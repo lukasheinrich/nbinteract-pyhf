@@ -2,10 +2,23 @@
 <head>
   <meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
   <title>Thebe Lab examples</title>
-  <link rel="stylesheet" type="text/css" href="index.css" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
+  <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js">
   </script>
+
+  <script>
+      $(function(){
+              $(".thebelab-button").addClass("btn");
+              $(".thebelab-button").addClass("btn-primary");
+              $(".thebelab-button").addClass("btn-sm");
+          });
+  </script>
+
   <!-- <script src="https://vega.github.io/vega/vega.min.js"></script> -->
 
   <!-- Configure and load Thebe !-->
@@ -28,7 +41,10 @@
 
 </head>
 <body>
-  <h1>pyhf interactive visualization</h1>
+  <div class="row">
+  <div class="col-md-2"></div>
+  <div class="col-md-8 col-md-offset-2">
+  <h1>Interactive Exploration of HistFactory Likelihoods in CAP</h1>
   <pre data-executable="true" data-language="python" width = "500">
 import requests
 import pyhfviz
@@ -37,6 +53,7 @@ wspace = requests.get('https://gist.githubusercontent.com/lukasheinrich/dd680c74
 
 pyhfviz.viz_likelihood(wspace)
   </pre>
-
+  </div>
+</div>
 </body>
 </html>
