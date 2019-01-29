@@ -45,6 +45,21 @@
   <div class="col-md-2"></div>
   <div class="col-md-8 col-md-offset-2">
   <h1>Interactive Exploration of HistFactory Likelihoods in CAP</h1>
+  <p>
+    Explanation: This example demonstrates the ability to access and visualize likelihoods stored
+    e.g. in repositories such as the CERN Analysis Preservation Portal.
+  </p>
+  <p>
+    Instructions: Click the "Run" button. A message with "Waiting for Kernel" should appear, and after 30 seconds or so an interactive visualization of a statistical model built using <code>HistFactory</code> should appear. You can try playing with the controls, which change the value of the parameters of the statistical models. In this model there is a single parameter of interest <code>SigXsecOverSM</code>, which controls the "bump" corresponding to a BSM component of the model, while a number of nuisnace parameters (both shape, and weight variations) control the SM backgrounds.
+  </p>
+    
+  <p>
+    Behind the Scenes: When you click "Run", a process in the cloud is started (using <a href="www.mybinder.org">Binder</a>), which retrieves the text files stored in the archive (think: CAP) and constructs the visualization using the Python implementation of <code>HistFactory</code>: <a href="https://github.com/diana-hep/pyhf">pyhf</a>
+    
+  </p>
+
+
+  </p>
   <pre data-executable="true" data-language="python" width = "500">
 import requests
 import pyhfviz
